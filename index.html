@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+    <style>
+        body{
+            background-image: url('./images/slide02.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var notRa = 'semRa';
+    var acessChat = url.searchParams.get("acessChat");
+    if(acessChat !== null){
+        localStorage.setItem('chatbot-info-student', acessChat);
+    }else if(acessChat === null){
+        localStorage.setItem('chatbot-info-student', notRa);
+    }
+    var paramChat;
+    var paramChatConcat;
+    paramChat = localStorage.getItem('chatbot-info-student');
+    paramChatConcat = paramChat;
+    let cronchatToken = '5224675044:AAHAAQHv_aKR-FFsktN10-mzJiWWp6x0tMU';
+    let hostURL = 'https://cronchatcronapp.cronapp.io/get-chat?token=';
+    let chatbotURL = `${hostURL}${cronchatToken}&extraparam=${paramChatConcat}`;
+    let scriptHTML = document.createElement("script");
+    scriptHTML.src = chatbotURL;
+    scriptHTML.type = 'text/javascript'
+    document.body.appendChild(scriptHTML);
+    window.onload = function () {
+    if (acessChat != null) {
+        setTimeout(function(){
+            clickBtnChat()
+          }, 1000);
+       }
+    }
+    function clickBtnChat(){
+        var btnConversationId = 'chatBtn_' + localStorage.getItem('conversationidbot');
+        document.getElementById(btnConversationId).click();
+}
+</script>
+    </body>
+</html>
